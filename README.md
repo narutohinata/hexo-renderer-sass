@@ -1,3 +1,5 @@
+### Forked by [(https://github.com/knksmith57/hexo-renderer-sass) ](https://github.com/knksmith57/hexo-renderer-sass)
+
 [Sass] renderer plugin for [Hexo]
 =================================
 

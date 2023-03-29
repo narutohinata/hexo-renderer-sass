@@ -23,10 +23,9 @@ describe('Sass renderer', function () {
     ].join('\n')
 
     var result = r('scss').call(ctx, { text: body }, {})
-    result.should.eql([
-      '.foo {',
-      '  color: red; }'
-    ].join('\n') + '\n')
+    result.should.eql(`.foo {
+  color: red;
+}`)
   })
 
   it('default: sass syntax', function () {
@@ -37,10 +36,9 @@ describe('Sass renderer', function () {
     ].join('\n')
 
     var result = r('sass').call(ctx, { text: body }, {})
-    result.should.eql([
-      '.foo {',
-      '  color: red; }'
-    ].join('\n') + '\n')
+    result.should.eql(`.foo {
+  color: red;
+}`);
   })
 
   it('outputStyle compressed: scss syntax', function () {
@@ -54,9 +52,7 @@ describe('Sass renderer', function () {
     ].join('\n')
 
     var result = r('scss').call(ctx, { text: body }, {})
-    result.should.eql([
-      '.foo{color:red}'
-    ].join('\n') + '\n')
+    result.should.eql(`.foo{color:red}`);
   })
 
   it('outputStyle compressed: sass syntax', function () {
@@ -69,9 +65,7 @@ describe('Sass renderer', function () {
     ].join('\n')
 
     var result = r('sass').call(ctx, { text: body }, {})
-    result.should.eql([
-      '.foo{color:red}'
-    ].join('\n') + '\n')
+    result.should.eql(`.foo{color:red}`)
   })
 
   it('supports root config: scss syntax', function () {
@@ -86,9 +80,7 @@ describe('Sass renderer', function () {
     ].join('\n')
 
     var result = r('scss').call(ctx, { text: body }, {})
-    result.should.eql([
-      '.foo{color:red}'
-    ].join('\n') + '\n')
+    result.should.eql(`.foo{color:red}`);
   })
 
   it('supports root config: sass syntax', function () {
@@ -102,9 +94,7 @@ describe('Sass renderer', function () {
     ].join('\n')
 
     var result = r('sass').call(ctx, { text: body }, {})
-    result.should.eql([
-      '.foo{color:red}'
-    ].join('\n') + '\n')
+    result.should.eql(`.foo{color:red}`);
   })
 
   it('throw when error occurs: scss syntax', function () {
@@ -117,9 +107,17 @@ describe('Sass renderer', function () {
       '}'
     ].join('\n')
 
-    should.Throw(function () {
-      return r('scss').call(ctx, { text: body }, {})
-    }, 'Undefined variable: "$color".')
+    should.Throw(
+      function () {
+        return r("scss").call(ctx, { text: body }, {});
+      },
+      `Undefined variable.
+  ╷
+2 │   color: $color;
+  │          ^^^^^^
+  ╵
+  stdin 2:10  root stylesheet`
+    );
   })
 
   it('throw when error occurs: sass syntax', function () {
@@ -131,8 +129,16 @@ describe('Sass renderer', function () {
       '  color: $color'
     ].join('\n')
 
-    should.Throw(function () {
-      return r('sass').call(ctx, { text: body }, {})
-    }, 'Undefined variable: "$color".')
+    should.Throw(
+      function () {
+        return r("sass").call(ctx, { text: body }, {});
+      },
+      `Undefined variable.
+  ╷
+2 │   color: $color
+  │          ^^^^^^
+  ╵
+  stdin 2:10  root stylesheet`
+    );
   })
 })
