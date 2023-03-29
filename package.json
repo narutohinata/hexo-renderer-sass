@@ -1,11 +1,11 @@
 {
-  "name": "hexo-renderer-sass",
-  "version": "0.4.0",
+  "name": "hexo-scss-renderer",
+  "version": "1.1.0",
   "description": "Sass renderer plugin for Hexo",
   "main": "index",
   "repository": {
     "type": "git",
-    "url": "git://github.com/knksmith57/hexo-renderer-sass.git"
+    "url": "https://github.com/narutohinata/hexo-renderer-sass"
   },
   "keywords": [
     "hexo",
@@ -13,7 +13,7 @@
     "scss",
     "renderer"
   ],
-  "author": "Kyle Smith <knksmith57@gmail.com>",
+  "author": "Chromer <chuliang2077@gmail.com>",
   "license": "MIT",
   "scripts": {
     "lint": "standard",
